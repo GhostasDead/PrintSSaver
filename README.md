@@ -1,5 +1,5 @@
 # PrintSSaver
-A Windows application to take screenshots and save clipboard images
+A light-weight Windows application to take screenshots and save clipboard images
 # Screenshots
 ![PrintSSaver](https://i.imgur.com/eFpT1ni.png)
 # Usage
