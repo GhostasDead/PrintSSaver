@@ -40,12 +40,13 @@
             this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFolderItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveClipboardItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deactivate = new System.Windows.Forms.ToolStripMenuItem();
+            this.activateItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.exit = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLbl = new System.Windows.Forms.Label();
-            this.SSSLoc = new System.Windows.Forms.Label();
+            this.ssSaveLocLbl = new System.Windows.Forms.Label();
             this.labelTip = new System.Windows.Forms.ToolTip(this.components);
+            this.aboutLabel = new System.Windows.Forms.LinkLabel();
             this.radioPName = new System.Windows.Forms.RadioButton();
             this.radioWName = new System.Windows.Forms.RadioButton();
             this.titlePanel = new System.Windows.Forms.Panel();
@@ -63,7 +64,7 @@
             this.chooseBtn = new System.Windows.Forms.Button();
             this.sfxChkBox = new System.Windows.Forms.CheckBox();
             this.defaultSFXbtn = new System.Windows.Forms.Button();
-            this.aboutLabel = new System.Windows.Forms.LinkLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.formatPanel.SuspendLayout();
@@ -83,7 +84,7 @@
             this.location.TabIndex = 0;
             this.location.Text = "Browse";
             this.location.UseVisualStyleBackColor = true;
-            this.location.Click += new System.EventHandler(this.location_Click);
+            this.location.Click += new System.EventHandler(this.browse_Click);
             // 
             // locationLabel
             // 
@@ -91,7 +92,7 @@
             this.locationLabel.Location = new System.Drawing.Point(27, 51);
             this.locationLabel.Name = "locationLabel";
             this.locationLabel.Size = new System.Drawing.Size(324, 13);
-            this.locationLabel.TabIndex = 16;
+            this.locationLabel.TabIndex = 17;
             this.locationLabel.Text = "%UserName%\\Pictures\\PSSaver";
             // 
             // titleLabel
@@ -100,7 +101,7 @@
             this.titleLabel.Location = new System.Drawing.Point(12, 112);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(33, 13);
-            this.titleLabel.TabIndex = 18;
+            this.titleLabel.TabIndex = 19;
             this.titleLabel.Text = "Title :";
             // 
             // saveClipboard
@@ -120,28 +121,26 @@
             this.formatLabel.Location = new System.Drawing.Point(12, 142);
             this.formatLabel.Name = "formatLabel";
             this.formatLabel.Size = new System.Drawing.Size(45, 13);
-            this.formatLabel.TabIndex = 19;
+            this.formatLabel.TabIndex = 20;
             this.formatLabel.Text = "Format :";
             // 
             // inTray
             // 
-            this.inTray.BalloonTipText = "Capturing \'PrintScreen\'";
-            this.inTray.BalloonTipTitle = "Working";
             this.inTray.ContextMenuStrip = this.menuStrip;
             this.inTray.Icon = ((System.Drawing.Icon)(resources.GetObject("inTray.Icon")));
-            this.inTray.Text = "PrintSSaver (Inactive)";
             this.inTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.inTray_Click);
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openFolderItem,
+            this.toolStripSeparator1,
             this.saveClipboardItem,
-            this.deactivate,
             this.toolTipSeparator,
+            this.activateItem,
             this.exit});
             this.menuStrip.Name = "toolTipStrip";
-            this.menuStrip.Size = new System.Drawing.Size(154, 98);
+            this.menuStrip.Size = new System.Drawing.Size(154, 126);
             // 
             // openFolderItem
             // 
@@ -157,12 +156,12 @@
             this.saveClipboardItem.Text = "Save Clipboard";
             this.saveClipboardItem.Click += new System.EventHandler(this.SaveClipboard_Click);
             // 
-            // deactivate
+            // activateItem
             // 
-            this.deactivate.Name = "deactivate";
-            this.deactivate.Size = new System.Drawing.Size(153, 22);
-            this.deactivate.Text = "Deactivate";
-            this.deactivate.Click += new System.EventHandler(this.disActivateBtn_Click);
+            this.activateItem.Name = "activateItem";
+            this.activateItem.Size = new System.Drawing.Size(153, 22);
+            this.activateItem.Text = "Activate";
+            this.activateItem.Click += new System.EventHandler(this.disActivateBtn_Click);
             // 
             // toolTipSeparator
             // 
@@ -185,24 +184,40 @@
             this.statusLbl.Location = new System.Drawing.Point(52, 9);
             this.statusLbl.Name = "statusLbl";
             this.statusLbl.Size = new System.Drawing.Size(342, 16);
-            this.statusLbl.TabIndex = 14;
+            this.statusLbl.TabIndex = 15;
             this.statusLbl.Text = "Press \'PrintScreen\' Key Anywhere To Save Screenshots";
             this.labelTip.SetToolTip(this.statusLbl, "\'Alt+PrintScreen\' Works Too");
             // 
-            // SSSLoc
+            // ssSaveLocLbl
             // 
-            this.SSSLoc.AutoSize = true;
-            this.SSSLoc.Location = new System.Drawing.Point(12, 33);
-            this.SSSLoc.Name = "SSSLoc";
-            this.SSSLoc.Size = new System.Drawing.Size(141, 13);
-            this.SSSLoc.TabIndex = 15;
-            this.SSSLoc.Text = "Screenshots Save Location:";
+            this.ssSaveLocLbl.AutoSize = true;
+            this.ssSaveLocLbl.Location = new System.Drawing.Point(12, 33);
+            this.ssSaveLocLbl.Name = "ssSaveLocLbl";
+            this.ssSaveLocLbl.Size = new System.Drawing.Size(141, 13);
+            this.ssSaveLocLbl.TabIndex = 16;
+            this.ssSaveLocLbl.Text = "Screenshots Save Location:";
+            // 
+            // aboutLabel
+            // 
+            this.aboutLabel.ActiveLinkColor = System.Drawing.Color.Gray;
+            this.aboutLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.aboutLabel.AutoSize = true;
+            this.aboutLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.aboutLabel.LinkColor = System.Drawing.Color.LightGray;
+            this.aboutLabel.Location = new System.Drawing.Point(397, 176);
+            this.aboutLabel.Name = "aboutLabel";
+            this.aboutLabel.Size = new System.Drawing.Size(35, 13);
+            this.aboutLabel.TabIndex = 14;
+            this.aboutLabel.TabStop = true;
+            this.aboutLabel.Text = "About";
+            this.labelTip.SetToolTip(this.aboutLabel, "A.S. (GhostasDead)");
+            this.aboutLabel.VisitedLinkColor = System.Drawing.Color.LightGray;
+            this.aboutLabel.Click += new System.EventHandler(this.aboutLabel_Click);
             // 
             // radioPName
             // 
             this.radioPName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radioPName.AutoSize = true;
-            this.radioPName.Checked = true;
             this.radioPName.Location = new System.Drawing.Point(4, 7);
             this.radioPName.Name = "radioPName";
             this.radioPName.Size = new System.Drawing.Size(94, 17);
@@ -210,7 +225,7 @@
             this.radioPName.TabStop = true;
             this.radioPName.Text = "Process Name";
             this.radioPName.UseVisualStyleBackColor = true;
-            this.radioPName.CheckedChanged += new System.EventHandler(this.radioTitle_CheckedChanged);
+            this.radioPName.Click += new System.EventHandler(this.radioPName_Click);
             // 
             // radioWName
             // 
@@ -223,6 +238,7 @@
             this.radioWName.TabStop = true;
             this.radioWName.Text = "Window Title";
             this.radioWName.UseVisualStyleBackColor = true;
+            this.radioWName.Click += new System.EventHandler(this.radioWName_Click);
             // 
             // titlePanel
             // 
@@ -246,7 +262,6 @@
             // 
             this.radioPngFormat.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radioPngFormat.AutoSize = true;
-            this.radioPngFormat.Checked = true;
             this.radioPngFormat.Location = new System.Drawing.Point(4, 7);
             this.radioPngFormat.Name = "radioPngFormat";
             this.radioPngFormat.Size = new System.Drawing.Size(48, 17);
@@ -254,7 +269,7 @@
             this.radioPngFormat.TabStop = true;
             this.radioPngFormat.Text = "PNG";
             this.radioPngFormat.UseVisualStyleBackColor = true;
-            this.radioPngFormat.CheckedChanged += new System.EventHandler(this.formatRadio_CheckedChanged);
+            this.radioPngFormat.Click += new System.EventHandler(this.radioPngFormat_Click);
             // 
             // radioJpegFormat
             // 
@@ -267,6 +282,7 @@
             this.radioJpegFormat.TabStop = true;
             this.radioJpegFormat.Text = "JPG";
             this.radioJpegFormat.UseVisualStyleBackColor = true;
+            this.radioJpegFormat.Click += new System.EventHandler(this.radioJpegFormat_Click);
             // 
             // ActivateBtn
             // 
@@ -306,7 +322,6 @@
             // 
             this.titleNtimestampRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.titleNtimestampRadio.AutoSize = true;
-            this.titleNtimestampRadio.Checked = true;
             this.titleNtimestampRadio.Location = new System.Drawing.Point(4, 7);
             this.titleNtimestampRadio.Name = "titleNtimestampRadio";
             this.titleNtimestampRadio.Size = new System.Drawing.Size(102, 17);
@@ -314,7 +329,7 @@
             this.titleNtimestampRadio.TabStop = true;
             this.titleNtimestampRadio.Text = "Title+Timestamp";
             this.titleNtimestampRadio.UseVisualStyleBackColor = true;
-            this.titleNtimestampRadio.CheckedChanged += new System.EventHandler(this.nameRadio_CheckedChanged);
+            this.titleNtimestampRadio.Click += new System.EventHandler(this.titleNtimestampRadio_Click);
             // 
             // timestampRadio
             // 
@@ -324,9 +339,10 @@
             this.timestampRadio.Name = "timestampRadio";
             this.timestampRadio.Size = new System.Drawing.Size(76, 17);
             this.timestampRadio.TabIndex = 6;
+            this.timestampRadio.TabStop = true;
             this.timestampRadio.Text = "Timestamp";
             this.timestampRadio.UseVisualStyleBackColor = true;
-            this.timestampRadio.CheckedChanged += new System.EventHandler(this.nameRadio_CheckedChanged);
+            this.timestampRadio.Click += new System.EventHandler(this.timestampRadio_Click);
             // 
             // titleRadio
             // 
@@ -336,9 +352,10 @@
             this.titleRadio.Name = "titleRadio";
             this.titleRadio.Size = new System.Drawing.Size(45, 17);
             this.titleRadio.TabIndex = 5;
+            this.titleRadio.TabStop = true;
             this.titleRadio.Text = "Title";
             this.titleRadio.UseVisualStyleBackColor = true;
-            this.titleRadio.CheckedChanged += new System.EventHandler(this.nameRadio_CheckedChanged);
+            this.titleRadio.Click += new System.EventHandler(this.titleRadio_Click);
             // 
             // appendLbl
             // 
@@ -346,7 +363,7 @@
             this.appendLbl.Location = new System.Drawing.Point(12, 82);
             this.appendLbl.Name = "appendLbl";
             this.appendLbl.Size = new System.Drawing.Size(41, 13);
-            this.appendLbl.TabIndex = 17;
+            this.appendLbl.TabIndex = 18;
             this.appendLbl.Text = "Name :";
             // 
             // soundLbl
@@ -355,7 +372,7 @@
             this.soundLbl.Location = new System.Drawing.Point(12, 172);
             this.soundLbl.Name = "soundLbl";
             this.soundLbl.Size = new System.Drawing.Size(69, 13);
-            this.soundLbl.TabIndex = 20;
+            this.soundLbl.TabIndex = 21;
             this.soundLbl.Text = "Enable SFX :";
             // 
             // chooseBtn
@@ -376,7 +393,7 @@
             this.sfxChkBox.TabIndex = 11;
             this.sfxChkBox.Text = "Default.wav";
             this.sfxChkBox.UseVisualStyleBackColor = true;
-            this.sfxChkBox.CheckedChanged += new System.EventHandler(this.sfxChkBox_CheckedChanged);
+            this.sfxChkBox.Click += new System.EventHandler(this.sfxChkBox_Click);
             // 
             // defaultSFXbtn
             // 
@@ -388,22 +405,10 @@
             this.defaultSFXbtn.UseVisualStyleBackColor = true;
             this.defaultSFXbtn.Click += new System.EventHandler(this.defaultSFXbtn_Click);
             // 
-            // aboutLabel
+            // toolStripSeparator1
             // 
-            this.aboutLabel.ActiveLinkColor = System.Drawing.Color.Gray;
-            this.aboutLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.aboutLabel.AutoSize = true;
-            this.aboutLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.aboutLabel.LinkColor = System.Drawing.Color.LightGray;
-            this.aboutLabel.Location = new System.Drawing.Point(397, 176);
-            this.aboutLabel.Name = "aboutLabel";
-            this.aboutLabel.Size = new System.Drawing.Size(35, 13);
-            this.aboutLabel.TabIndex = 21;
-            this.aboutLabel.TabStop = true;
-            this.aboutLabel.Text = "About";
-            this.labelTip.SetToolTip(this.aboutLabel, "A.S. (GhostasDead)");
-            this.aboutLabel.VisitedLinkColor = System.Drawing.Color.LightGray;
-            this.aboutLabel.Click += new System.EventHandler(this.aboutLabel_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(150, 6);
             // 
             // PrintSSaver
             // 
@@ -421,7 +426,7 @@
             this.Controls.Add(this.ActivateBtn);
             this.Controls.Add(this.formatPanel);
             this.Controls.Add(this.titlePanel);
-            this.Controls.Add(this.SSSLoc);
+            this.Controls.Add(this.ssSaveLocLbl);
             this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.formatLabel);
             this.Controls.Add(this.saveClipboard);
@@ -458,7 +463,7 @@
         private System.Windows.Forms.Label formatLabel;
         private System.Windows.Forms.NotifyIcon inTray;
         private System.Windows.Forms.Label statusLbl;
-        private System.Windows.Forms.Label SSSLoc;
+        private System.Windows.Forms.Label ssSaveLocLbl;
         private System.Windows.Forms.ToolTip labelTip;
         private System.Windows.Forms.RadioButton radioPName;
         private System.Windows.Forms.RadioButton radioWName;
@@ -467,7 +472,7 @@
         private System.Windows.Forms.RadioButton radioPngFormat;
         private System.Windows.Forms.RadioButton radioJpegFormat;
         private System.Windows.Forms.ContextMenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem deactivate;
+        private System.Windows.Forms.ToolStripMenuItem activateItem;
         private System.Windows.Forms.ToolStripMenuItem exit;
         private System.Windows.Forms.ToolStripSeparator toolTipSeparator;
         private System.Windows.Forms.Button ActivateBtn;
@@ -484,6 +489,7 @@
         private System.Windows.Forms.CheckBox sfxChkBox;
         private System.Windows.Forms.Button defaultSFXbtn;
         private System.Windows.Forms.LinkLabel aboutLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
