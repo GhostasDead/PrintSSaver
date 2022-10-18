@@ -557,7 +557,14 @@ namespace PrintSSaver
         private void aboutLabel_Click(object sender, EventArgs e)
         {
             // opens Github repo in browser
-            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/GhostasDead/PrintSSaver");
+            try
+            {
+                Process.Start("https://github.com/GhostasDead/PrintSSaver");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Something went wrong\n\'{ex.Message}\'");
+            }
         }
         #endregion
 
