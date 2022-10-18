@@ -387,11 +387,18 @@ namespace PrintSSaver
         {
             try
             {
-                Process.Start("explorer.exe", screenshotsSavePath);
+                Process.Start(screenshotsSavePath);
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't Access Folder", "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    Directory.CreateDirectory(screenshotsSavePath);
+                    Process.Start(screenshotsSavePath);
+                }
+                catch (Exception) {
+                    MessageBox.Show("Can't Access Folder", "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void SaveClipboard_Click(object sender, EventArgs e)
