@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PrintSSaver
 {
-    static class AppDefaultProberties
+    internal static class AppDefaultProberties
     {
         #region Settings' path
         /// <summary>

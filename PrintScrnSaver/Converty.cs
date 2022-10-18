@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace PrintSSaver
 {
-    static class Converty
+    internal static class Converty
     {
         #region Converts for different memory and storage scenarios
         internal static byte ByteAppends(string appends)
